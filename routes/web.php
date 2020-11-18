@@ -28,12 +28,14 @@ use App\Http\Controllers\PostsController;
 //     ]);
 // });
 
-Route::get('posts/{post}', [PostsController::class, 'show']);
 
 Route::get('/', function () {
   return view('welcome');
 });
 
 Route::get('/about', function () {
-  return view('about');
-});
+  
+  return view('about', [
+    'articles' => App\Models\Article::take(3)->latest()->get()
+    ]);
+  });
